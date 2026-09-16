@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background-color: #f8fafc;
+}
+
+/*
+ * Standard-Farbschema (Stufen 50-900), falls keine reisebüro-spezifische
+ * brandColor aus der HashKey-Antwort vorliegt. Auf der Bewertungsseite
+ * selbst überschreibt HotelReviewApp.tsx diese Variablen per Inline-Style
+ * mit der aus brandColor abgeleiteten Skala (siehe lib/colorScale.ts) -
+ * die Werte hier sind nur der Fallback (z.B. für die Startseite).
+ */
+:root {
+  --brand-50: #f2f8f7;
+  --brand-100: #dcece9;
+  --brand-200: #b8dad4;
+  --brand-300: #8dc2b8;
+  --brand-400: #5fa398;
+  --brand-500: #3f847a;
+  --brand-600: #2f6a61;
+  --brand-700: #27544e;
+  --brand-800: #22453f;
+  --brand-900: #1e3a36;
+}

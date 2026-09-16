@@ -1,0 +1,69 @@
+Ich benötige eine App mit folgenden Funktionen und Inhalten.
+Es gelten die gleichen Rahmenbedingungen wie bei der MyFamily App
+
+Mit der App sollen Bewertungen von Pauschalreisen und Hotelaufenthalten von Kunden erfasst werden. Diese Reisen wurden vorher über ein MidOffice gebucht und sind dort gespeichert.
+
+Pro Bewertungen sollen folgende Daten erhoben werden:
+- Kannst Du das Hotel empfehlen (Ja/Nein)
+- Wie bewertest du das Hotel allgemein? (Sehr schlecht, Schlecht, Eher Schlecht, Eher Gut, Gut, sehr Gut)
+- Beschreibe das Hotel (Freier Text, mind. 100 Zeichen)
+- Mit wem bist du verreist (Alleine, Paar, Familie, Gruppe)
+- Berichte über Zimmer
+-- Wie hast du die Zimmergröße empfunden  (keine Angabe, Sehr schlecht, Schlecht, Eher Schlecht, Eher Gut, Gut, sehr Gut)
+-- Wie war die Sauberkeit von Zimmer und Bad?  (keine Angabe, Sehr schlecht, Schlecht, Eher Schlecht, Eher Gut, Gut, sehr Gut)
+-- Wie hast du geschlafen?  (keine Angabe, Sehr schlecht, Schlecht, Eher Schlecht, Eher Gut, Gut, sehr Gut)
+-- Wie würdest du deine Erfahrung mit dem Zimmer beschreiben?(keine Angabe oder Text)
+- Bericht über Verpflegung
+-- Wie hat es dir geschmeckt?(keine Angabe, Sehr schlecht, Schlecht, Eher Schlecht, Eher Gut, Gut, sehr Gut)
+-- Wie abwechslungsreich war die Auswahl beim Essen? (keine Angabe, Sehr schlecht, Schlecht, Eher Schlecht, Eher Gut, Gut, sehr Gut)
+-- Was müssen Gäste über die Gastronomie wissen? (keine Angabe oder Text)
+- Bericht über Service
+-- Wo war der Service besonders gut ?(Zimmer, Rezeption, Bar/Disco/Restaurant, Gästebetreuung, Animation, Woanders, Nirgends, keine Angabe) Es können mehre ausgewählt werden
+-- Wie war der Umgang des Personals mit den Gästen? (keine Angabe oder Text)
+- Bericht über Aktivitäten
+-- Was hast du während deines Aufenthalts gemacht? (Animation, Sport, Kultur & Erlebnis, Ausgehen & Nightlife, Geschäftsreise, Sonstiges, Nichts)Es können mehre ausgewählt werden
+- Bericht über Preis-Leistung
+-- Wie war das Preis-Leistungs-Verhältnis? (keine Angabe, Sehr schlecht, Schlecht, Eher Schlecht, Eher Gut, Gut, sehr Gut)
+-- Gab es unerwartete Kosten während deines Aufenthalts? (ja, nein, keine Angabe)
+- Bericht über Verkehrsanbindung
+-- Ist das Hotel mit öffentlichen Verkehrsmitteln gut erreichbar?  (ja, nein, keine Angabe)
+-- Gab es Parkplätze in der Nähe?  (ja, nein, keine Angabe)
+-- Wie ist die Lage des Hotels für Sehenswürdigkeiten und Aktivitäten?  (keine Angabe, Sehr schlecht, Schlecht, Eher Schlecht, Eher Gut, Gut, sehr Gut)
+-- Wie gut ist das Hotel zu erreichen? (keine Angabe, Text)
+- Bericht über Nachhaltigkeit
+-- Wie umweltfreundlich ist die Unterkunft? z. B. Energiesparen, Abfallreduzierung und Recycling? (keine Angabe, Sehr schlecht, Schlecht, Eher Schlecht, Eher Gut, Gut, sehr Gut)
+-- Wie gut unterstützt die Unterkunft die lokale Wirtschaft? z. B. durch lokale Produkte und Dienstleistungen? (keine Angabe, Sehr schlecht, Schlecht, Eher Schlecht, Eher Gut, Gut, sehr Gut)
+-- Wie gut vermittelt die Unterkunft lokale Kultur? z. B. durch Veranstaltungen oder sozialer Projekte? (keine Angabe, Sehr schlecht, Schlecht, Eher Schlecht, Eher Gut, Gut, sehr Gut)
+-- Welche nachhaltigen Maßnahmen hast du während deines Aufenthaltes im Hotel bemerkt? (keine Angabe, Text)
+- Hast du eine Gegenleistung vom Hotelier für deine Bewertung erhalten? (Nein, Ermäßigung oder Gutschein, Kostenloser später CheckOut, Kostenloses Getränk, Dankeschön Geschenk, Sonstiges, keine Angabe)
+- Was ist Dein Geheimtipp vor Ort? (keine Angabe, Text)
+- Um deine Bewertung fertig zu stellen, gib ihr bitte einen aussagekräftigen Titel (keine Angabe, Text)
+
+Setzte das ganze als Steps um , die nacheinader abgearbeitet werden sollen. Vor den Berichten soll ein Step vorhanden sein, der auswählt, zu welchen Bereich Berichte erfasst werden sollen.
+Vor dem Absenden/Speichern der Daten soll noch einmal eine summary der eingegebenen Daten erfolgen.
+
+Der Einstieg für eine Bewertung/Feedback ist immer eine bestehende Reise, die über ein bekanntes System gebucht worden ist. Der Aufruf der App erfolgt immer mir der Übergabe eines HashKey.
+Dieser kann über einen Webabruf aufgelöst werden und es kommen die entsprechenden Daten als JSON zurück. Im JSON ist folgendes enthalten:
+- Name des Hotels
+- Reisezeitraum
+- Bild des Hotels
+- Regionstext (Ort, Region, Land)
+Bilde das JSON selber, so wie es für dich sinnvoll ist und teile die Struktur mit mir, damit ich später das CGI zur Verfügung stellen kann. 
+Wird als HashKey "TEST" übergeben sollen folgende Dummywerte verwendet werden
+- Name des Hotels "Hotel zur Sonne"
+- Reisezeitraum "September 2026"
+- Bild des Hotels "https://www.alpenheim.net/typo3temp/_processed_/csm_alpenheimhaus_fb297ea437.jpg"
+- Regionstext "Fiss, Tirol, Österreich"
+
+Die erfassten Daten sollen an ein CGI gepuscht (POST) werden. Als Übergabe wird eine JSON Struktur erwartet. Bitte erarbeite eine entsprechende JSON Struktur. Die URL und die Syntax erfolgt im nächstren Schritt.
+
+Sonstiges:
+Bei der Auswahlmöglichkeit (sehr schlecht, schlecht, …) Sollen eine grafische Umsetzung erfolgen
+Ausgabe 6 leere Kreise. Klick aus erste Kreis , nur erster Kreis gefüllt, Klick auf zweiter Kreis -> 1ter und 2ter Kreis gefüllt.
+
+Auf meinem Rechner gibt es unter source bereits einen Ordner Feedback, der verwendet werden soll.
+
+
+
+
+
