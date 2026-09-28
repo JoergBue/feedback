@@ -67,9 +67,9 @@ Erwartete Antwort bei Erfolg (HTTP 200):
 
 | Feld                              | Typ    | Beschreibung                                   |
 | ---------------------------------- | ------ | ----------------------------------------------- |
-| `bns_response.Feedback.hotel.name`     | string | Name des Hotels                            |
-| `bns_response.Feedback.hotel.imageUrl` | string | Bild-URL des Hotels                        |
-| `bns_response.Feedback.hotel.region`   | string | Regionstext (Ort, Region, Land)            |
+| `bns_response.Feedback.hotel.name`     | string | Name des Hotels - **einziges wirklich zwingendes Feld neben travelPeriod** |
+| `bns_response.Feedback.hotel.imageUrl` | string, kann leer sein | Bild-URL des Hotels. Kommt bei manchen Buchungen als leerer String zurück (bestätigt am Beispiel-HashKey mit Hotel "Valentin Reina Paguera") - die App zeigt dann einen Platzhalter statt eines kaputten Bilds, statt den HashKey als "nicht gefunden" zu werten |
+| `bns_response.Feedback.hotel.region`   | string, kann leer sein | Regionstext (Ort, Region, Land). Kann ebenfalls leer sein - die App blendet die Regionszeile dann einfach aus |
 | `bns_response.Feedback.travelPeriod`   | string | Reisezeitraum als Anzeigetext - **kann HTML enthalten** (z. B. `<br>`) und wird von der App entsprechend als Markup gerendert, nicht als reiner Text |
 | `bns_response.Feedback.brandColor`     | string, optional | Hex-Farbe des Reisebüros (z. B. `"#1C448C"`), aus der die App ein komplettes Farbschema ableitet - siehe unten. Fehlt das Feld oder ist der Wert kein gültiger Hex-Code, verwendet die App eine Standardfarbe |
 | `bns_response.Feedback.office.name`    | string, optional | Name des vermittelnden Reisebüros - siehe unten |
@@ -96,9 +96,13 @@ selbst) - daran ändert sich durch das Gateway nichts.
 
 Fehlerfall: Antwortet das Gateway mit einem Nicht-200-Status und einem
 `Fail`-Objekt (siehe Abschnitt "Fehlerformat" unten), zeigt die App die
-Gateway-Meldung an. Antwortet das Gateway mit 200, aber ohne Hotel-/
-Reisedaten in `bns_response.Feedback`, wertet die App das als "HashKey
-nicht gefunden".
+Gateway-Meldung an. Antwortet das Gateway mit 200, aber ohne `hotel.name`
+oder ohne `travelPeriod` in `bns_response.Feedback`, wertet die App das als
+"HashKey nicht gefunden" - das sind die beiden einzigen Felder, die die App
+zwingend braucht. `hotel.imageUrl` und `hotel.region` dürfen leer sein,
+ohne dass der HashKey deswegen als "nicht gefunden" behandelt wird (Stand
+28.09.2026, nach einem konkreten Fall mit leerem Bild/leerer Region bei
+sonst gültigen Daten).
 
 **Sonderfall `TEST`:** Wird `TEST` als HashKey übergeben, beantwortet die
 App-eigene Route (`/api/hotel/TEST`) die Anfrage **ohne** das Gateway

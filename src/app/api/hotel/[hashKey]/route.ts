@@ -119,9 +119,13 @@ export async function GET(
         : undefined;
 
     // Das Gateway antwortet auch mit HTTP 200 bei unbekanntem HashKey, aber
-    // ohne befüllte Feedback-Daten - das werten wir defensiv als NOT_FOUND,
-    // solange kein explizites Fehlerformat dokumentiert ist.
-    if (!hotel?.name || !hotel.imageUrl || !hotel.region || !travelPeriod) {
+    // ohne befüllte Feedback-Daten - das werten wir defensiv als NOT_FOUND.
+    // Nur Name und Reisezeitraum sind hier wirklich zwingend: imageUrl und
+    // region kommen bei manchen echten Buchungen leer vom Gateway zurück
+    // (bestaetigt am 2026-09-28 am Beispiel-HashKey "vorbei" - Bild und
+    // Region leer, Rest der Daten aber gueltig) und werden unten als
+    // optionale Felder behandelt statt die ganze Buchung zu verwerfen.
+    if (!hotel?.name || !travelPeriod) {
       const body: HotelLookupResponse = {
         status: "error",
         hashKey,
@@ -136,8 +140,8 @@ export async function GET(
       hashKey,
       hotel: {
         name: hotel.name,
-        imageUrl: hotel.imageUrl,
-        region: hotel.region,
+        imageUrl: hotel.imageUrl || undefined,
+        region: hotel.region || undefined,
       },
       travelPeriod,
       // Ungültige Werte werden nicht hier, sondern zentral in

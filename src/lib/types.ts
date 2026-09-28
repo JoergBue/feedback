@@ -57,8 +57,10 @@ export type Compensation =
 
 export interface HotelInfo {
   name: string;
-  imageUrl: string;
-  region: string;
+  /** Kann vom Gateway leer geliefert werden - dann zeigt die App einen Platzhalter statt eines kaputten Bilds. */
+  imageUrl?: string;
+  /** Kann vom Gateway leer geliefert werden - dann wird die Regionszeile ausgeblendet. */
+  region?: string;
 }
 
 /** Name und Adresse des vermittelnden Reisebüros (optional). */
